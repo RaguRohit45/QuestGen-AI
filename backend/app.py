@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import os
+from dotenv import load_dotenv
 from werkzeug.utils import secure_filename
 from openai import OpenAI
 from pdf_processor import PDFProcessor
@@ -8,6 +9,9 @@ from rag_system import RAGSystem
 import json
 import time
 import re
+
+# Load environment variables from .env file
+load_dotenv()
 
 app = Flask(__name__)
 CORS(app)
@@ -19,6 +23,11 @@ os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY")
 OPENROUTER_MODEL = "anthropic/claude-3-haiku"
 OPENROUTER_BASE_URL = "https://openrouter.ai/api/v1"
+
+# Validate API key
+if not OPENROUTER_API_KEY:
+    raise ValueError("OPENROUTER_API_KEY environment variable is not set")
+
 client = OpenAI(
     api_key=OPENROUTER_API_KEY,
     base_url=OPENROUTER_BASE_URL,
@@ -35,6 +44,10 @@ def call_openrouter_api(prompt, max_retries=3, initial_delay=5):
     
     for attempt in range(max_retries):
         try:
+            print(f"Calling OpenRouter API (Attempt {attempt + 1}/{max_retries})...")
+            print(f"Using model: {OPENROUTER_MODEL}")
+            print(f"API Key present: {'Yes' if OPENROUTER_API_KEY else 'No'}")
+            
             response = client.chat.completions.create(
                 model=OPENROUTER_MODEL,
                 messages=[
@@ -45,14 +58,22 @@ def call_openrouter_api(prompt, max_retries=3, initial_delay=5):
                 ]
             )
             response_text = response.choices[0].message.content
+            print(f"API Response received successfully")
+            
             class Response:
                 def __init__(self, text):
                     self.text = text
             return Response(response_text)
         except Exception as e:
             error_str = str(e)
+            print(f"API Error: {error_str}")
             
-            if '429' in error_str or 'rate limit' in error_str.lower() or 'quota' in error_str.lower():
+            # Check for specific error types
+            if '401' in error_str or 'unauthorized' in error_str.lower():
+                raise Exception("Invalid API key. Please check your OPENROUTER_API_KEY.")
+            elif '404' in error_str or 'not found' in error_str.lower():
+                raise Exception("Model not found. Please check OPENROUTER_MODEL.")
+            elif '429' in error_str or 'rate limit' in error_str.lower() or 'quota' in error_str.lower():
                 if attempt < max_retries - 1:
                     delay = delay * 2
                     print(f"Rate limit exceeded. Retrying in {delay:.1f} seconds... (Attempt {attempt + 1}/{max_retries})")
@@ -60,6 +81,8 @@ def call_openrouter_api(prompt, max_retries=3, initial_delay=5):
                     continue
                 else:
                     raise Exception(f"API rate limit exceeded after {max_retries} attempts. Please try again later.")
+            elif '<!doctype' in error_str.lower() or '<html' in error_str.lower():
+                raise Exception("API returned HTML instead of JSON. This usually indicates a server error or incorrect endpoint.")
             else:
                 raise e
     
