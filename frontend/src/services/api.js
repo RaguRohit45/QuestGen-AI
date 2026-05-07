@@ -1,4 +1,4 @@
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
+const API_BASE_URL = process.env.REACT_APP_API_URL || 'https://questgen-ai-iqt2.onrender.com/apigit add .';
 
 class ApiService {
   async healthCheck() {
