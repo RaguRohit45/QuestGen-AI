@@ -14,7 +14,7 @@
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
 }
 
-/* Progress Bar */
+
 .progress-section {
   margin-bottom: 40px;
 }
@@ -90,7 +90,6 @@
   font-weight: 600;
 }
 
-/* Step Content */
 .step-content {
   min-height: 400px;
   margin-bottom: 30px;
@@ -131,7 +130,7 @@
   color: #666;
 }
 
-/* Intro Step */
+
 .intro-content-step {
   text-align: center;
 }
@@ -219,7 +218,6 @@
   font-size: 0.95rem;
 }
 
-/* Upload Section */
 .upload-section {
   display: flex;
   flex-direction: column;
@@ -281,7 +279,7 @@
   box-shadow: 0 5px 15px rgba(102, 126, 234, 0.1);
 }
 
-/* Questions Modal */
+
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -364,7 +362,7 @@
   margin-bottom: 10px;
   flex-wrap: wrap;
   gap: 10px;
-  padding-right: 30px; /* Space for copy button */
+  padding-right: 30px;  
 }
 
 .copy-button {
@@ -566,7 +564,7 @@
   font-weight: 500;
 }
 
-/* Navigation Buttons */
+
 .navigation-buttons {
   display: flex;
   justify-content: space-between;
@@ -635,7 +633,7 @@
   cursor: not-allowed;
 }
 
-/* Alert Messages */
+
 .alert {
   padding: 15px 20px;
   border-radius: 10px;
@@ -673,7 +671,7 @@
   font-size: 1.2rem;
 }
 
-/* Question Configuration Step */
+
 .pattern-info {
   background: #f8f9fa;
   padding: 20px;
@@ -819,7 +817,6 @@
   font-size: 1.1rem;
 }
 
-/* Responsive Design */
 @media (max-width: 768px) {
   .upload-container {
     padding: 25px 20px;

@@ -1,4 +1,4 @@
-git rm --cached backend/.env.question-generation-loader {
+.env.question-generation-loader {
   position: fixed;
   top: 0;
   left: 0;
