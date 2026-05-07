@@ -23,7 +23,7 @@ client = OpenAI(
     api_key=OPENROUTER_API_KEY,
     base_url=OPENROUTER_BASE_URL,
     default_headers={
-        "HTTP-Referer": "http://localhost:3000",
+        "HTTP-Referer": "https://questgen-ai-1.onrender.com",
         "X-Title": "QuestGen AI"
     }
 )
