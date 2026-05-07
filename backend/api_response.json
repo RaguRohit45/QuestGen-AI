@@ -1,0 +1,65 @@
+{
+  "message": "Questions generated successfully",
+  "metadata": {
+    "co_coverage": [
+      "CO1",
+      "CO3",
+      "CO2"
+    ],
+    "po_coverage": [
+      "PO4",
+      "PO3",
+      "PO2",
+      "PO1"
+    ],
+    "total_questions": 3
+  },
+  "questions": [
+    {
+      "co_mapping": [
+        "CO1"
+      ],
+      "difficulty_level": "Easy",
+      "marks": 2,
+      "po_mapping": [
+        "PO1",
+        "PO4"
+      ],
+      "question_number": 1,
+      "question_text": "Identify the type of variable scope for the following Python code snippet: `x = 5; def func(): print(x)`",
+      "question_type": "MCQ",
+      "topic": "Programming Fundamentals"
+    },
+    {
+      "co_mapping": [
+        "CO2"
+      ],
+      "difficulty_level": "Medium",
+      "marks": 2,
+      "po_mapping": [
+        "PO1",
+        "PO2"
+      ],
+      "question_number": 2,
+      "question_text": "What is the time complexity of a binary search algorithm on a sorted array? Justify in one sentence.",
+      "question_type": "Short",
+      "topic": "Data Structures"
+    },
+    {
+      "co_mapping": [
+        "CO3"
+      ],
+      "difficulty_level": "Medium",
+      "marks": 5,
+      "po_mapping": [
+        "PO1",
+        "PO3",
+        "PO4"
+      ],
+      "question_number": 3,
+      "question_text": "Explain object-oriented programming with a real-world example. Compare encapsulation, inheritance, and polymorphism in the context of your example (maximum 150 words).",
+      "question_type": "Short",
+      "topic": "Object-Oriented Programming"
+    }
+  ]
+}
