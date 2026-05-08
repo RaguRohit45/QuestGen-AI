@@ -1,7 +1,6 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import os
-from dotenv import load_dotenv
 from werkzeug.utils import secure_filename
 from openai import OpenAI
 from pdf_processor import PDFProcessor
@@ -9,9 +8,6 @@ from rag_system import RAGSystem
 import json
 import time
 import re
-
-# Load environment variables from .env file
-load_dotenv()
 
 app = Flask(__name__)
 CORS(app)
